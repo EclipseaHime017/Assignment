@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="cs205-c-c-programming---lab-assignment-template">CS205 C/ C++ Programming - Lab Assignment  Template</h1>
+<p><strong>Name:</strong> 殷海洲(Yin Haizhou)<br>
+<strong>SID:</strong> 12210226</p>
+<br>
+<h2 id="part-1---analysis">Part 1 - Analysis</h2>
+<blockquote>
+<p>Implement a calculator that can add, subtract, multiply and divide two numbers. The project can help you become familiar with the steps of C development, basic C syntax, and command-line commands.  No GUI is needed for the calculator. A command-line program is fine.</p>
+</blockquote>
+<p>This project can be roughly separated into two parts which are in/output and calculation.</p>
+<blockquote>
+<p>Requirements</p>
+<ol>
+<li>The programming language should only be C, NOT C++.</li>
+<li>When you run the program as follows, it will print the expression and the result.</li>
+<li>It can tell the reason why the operation cannot be carried out.</li>
+<li>It can tell the reason when the input is not a number</li>
+<li>Try to resolve calculations with big numbers</li>
+<li>It could be adapted to another type in which no valid arguments are directly provided.</li>
+</ol>
+</blockquote>
+<p>It is comparatively straightforward to input the equation through command-line according to the requirements, so we directly get our eqaution from the default arguments of the main function. During this process, we need determine if numbers or operators are valid, and consequently it is a good idea to construct a function to check before starting to calculate.</p>
+<p>It would be rather complicated to deal with calculation since <code>int</code> type of data or <code>double</code> type is also limited and not precise enough for big numbers. Thus, we may consider not rely much on those datatypes but try to decompose numbers into strings or characters and they can be calculated separately and finally assembled.<em>(I will also attach my attempt to build up my own theory of calculation)</em></p>
+<p>Also, We can choose to rely on the funds of previous people who have tried to build their theory of calculation. We may use them as a reference to solve problems. And we use it by <code>#include &lt;gmp.h&gt;</code></p>
+<h2 id="part-2---code">Part 2 - Code</h2>
+<blockquote>
+<p>Preprocessing</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;gmp.h&gt;</span></span>
+</div></code></pre>
+<blockquote>
+<p>Define a function to determine type of numbers</p>
+<blockquote>
+<p>In total, there are three types --- invalid, ordinary, and scientific numbers.</p>
+<p>To exclude invalid inputs, we need to check each character and its arrangement of them.</p>
+</blockquote>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Istype</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *num)</span>
+</span>{
+    <span class="hljs-keyword">int</span> negative = <span class="hljs-number">0</span>;<span class="hljs-comment">//negative marks</span>
+    <span class="hljs-keyword">int</span> expo = <span class="hljs-number">0</span>;<span class="hljs-comment">//exponetial denotation</span>
+    <span class="hljs-keyword">int</span> decimal = <span class="hljs-number">0</span>;<span class="hljs-comment">//decimal dot</span>
+    <span class="hljs-keyword">int</span> type = <span class="hljs-number">1</span>; <span class="hljs-comment">//default valid number </span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt;= <span class="hljs-built_in">strlen</span>(num)<span class="hljs-number">-1</span>;i++)
+    {
+        <span class="hljs-keyword">if</span>(num[i] &lt; <span class="hljs-string">'0'</span> || num[i] &gt; <span class="hljs-string">'9'</span>)
+        {
+            <span class="hljs-keyword">if</span> (num[i] == <span class="hljs-string">'+'</span>||num[i] == <span class="hljs-string">'-'</span>)
+            {
+                <span class="hljs-keyword">if</span>(i!=<span class="hljs-number">0</span>) 
+                    type = <span class="hljs-number">0</span>; 
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((num[i] == <span class="hljs-string">'e'</span>||num[i]==<span class="hljs-string">'E'</span>)&amp;&amp;i != <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-keyword">if</span>(expo == <span class="hljs-number">0</span>)
+                {
+                    expo++;
+                    type = <span class="hljs-number">2</span>;
+                    <span class="hljs-keyword">if</span> (num[i+<span class="hljs-number">1</span>] != <span class="hljs-string">'+'</span>&amp;&amp;num[i+<span class="hljs-number">1</span>] != <span class="hljs-string">'-'</span>&amp;&amp;(num[i+<span class="hljs-number">1</span>]&lt; <span class="hljs-string">'0'</span> || num[i+<span class="hljs-number">1</span>] &gt; <span class="hljs-string">'9'</span>)) 
+                        type = <span class="hljs-number">0</span>;
+                    i++;
+                    decimal = <span class="hljs-number">0</span>;
+                    <span class="hljs-comment">//if "e" appear, decimal dot clear</span>
+                }
+                <span class="hljs-keyword">else</span> 
+                    type = <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num[i] == <span class="hljs-string">'.'</span>)
+            {
+                <span class="hljs-keyword">if</span>(decimal == <span class="hljs-number">0</span>) 
+                {
+                    decimal++;
+                    type = <span class="hljs-number">2</span>;
+                }
+                <span class="hljs-keyword">else</span> type = <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">else</span>  
+                type = <span class="hljs-number">0</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> type;
+}
+<span class="hljs-comment">//Determine type of a number</span>
+</div></code></pre>
+<br>
+<blockquote>
+<p>Define a function to calculate and return a integer or decimal.</p>
+<blockquote>
+<p>We take advantage of gmp package which includes a special datatype of mpf_t with sufficient length.</p>
+<p>It's important to follow the grammar of the package to calculate the result while avoiding unecessary trouble. It is also essential to consider how to get a decent result without redundant affix.</p>
+</blockquote>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Excal</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *num1, <span class="hljs-keyword">char</span> *num2, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">operator</span>)</span>
+</span>{
+    <span class="hljs-keyword">mpf_t</span> a,b,result;
+    mpf_init(a);
+    mpf_init(b);
+    mpf_init(result);
+    mpf_set_str(a,num1,<span class="hljs-number">10</span>);
+    mpf_set_str(b,num2,<span class="hljs-number">10</span>);
+    <span class="hljs-keyword">int</span> validation = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strlen</span>(<span class="hljs-keyword">operator</span>) != <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid Input. Please check your operator.\n"</span>);
+        }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"+"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_add(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"-"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_sub(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"*"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_mul(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"/"</span>) == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">if</span> (mpf_cmp_ui(b, <span class="hljs-number">0</span>) == <span class="hljs-number">0</span>) 
+            {
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"A number cannot be divied by zero.\n"</span>);
+                validation = <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">else</span>
+                mpf_div(result, a, b); 
+        } 
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid Input\n"</span>);
+            validation = <span class="hljs-number">0</span>;
+        }
+
+        <span class="hljs-comment">//kill zeros(disorder)</span>
+        <span class="hljs-keyword">int</span> precision = mpf_get_default_prec();
+        <span class="hljs-keyword">char</span> *numberstring;
+        gmp_asprintf(&amp;numberstring, <span class="hljs-string">"%.*Ff"</span>, precision, result);
+
+        <span class="hljs-keyword">if</span> (numberstring != <span class="hljs-literal">NULL</span>&amp;&amp;validation != <span class="hljs-number">0</span>) 
+        {
+            <span class="hljs-keyword">int</span> len = <span class="hljs-built_in">strlen</span>(numberstring);
+            <span class="hljs-keyword">char</span> *dot = <span class="hljs-built_in">strchr</span>(numberstring, <span class="hljs-string">'.'</span>);
+    
+            <span class="hljs-keyword">if</span> (dot != <span class="hljs-literal">NULL</span>) {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) 
+                {
+                    <span class="hljs-keyword">if</span> (numberstring[i] == <span class="hljs-string">'0'</span> || numberstring[i] == <span class="hljs-string">'.'</span>) 
+                        numberstring[i] = <span class="hljs-string">'\0'</span>;
+                    <span class="hljs-keyword">else</span>
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s %s %s = "</span>, num1, <span class="hljs-keyword">operator</span>, num2);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, numberstring);
+            <span class="hljs-built_in">free</span>(numberstring);
+        }           
+    }
+    mpf_clear(a);
+    mpf_clear(b);
+    mpf_clear(result);
+}
+<span class="hljs-comment">//Versatile Calculator</span>
+</div></code></pre>
+<blockquote>
+<blockquote>
+<p>Scientific notation is a special type of number. To deal with it, we not only offer a type but also define a function to give results of scientific numbers
+This function resembles the one above, but they trouble in different aspects, which I would like to show later.</p>
+</blockquote>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SciExcal</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *num1, <span class="hljs-keyword">char</span> *num2, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">operator</span>)</span>
+</span>{
+    <span class="hljs-keyword">mpf_t</span> a,b,result;
+    mpf_init(a);
+    mpf_init(b);
+    mpf_init(result);
+    mpf_set_str(a,num1,<span class="hljs-number">10</span>);
+    mpf_set_str(b,num2,<span class="hljs-number">10</span>);
+    mpf_set_default_prec(<span class="hljs-number">400</span>);
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strlen</span>(<span class="hljs-keyword">operator</span>) != <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid Input. Please check your operator.\n"</span>);
+        }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"+"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_add(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"-"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_sub(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"*"</span>) == <span class="hljs-number">0</span>)
+        {
+            mpf_mul(result, a, b);
+        } 
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(<span class="hljs-keyword">operator</span>,<span class="hljs-string">"/"</span>) == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">if</span> (mpf_cmp_ui(b, <span class="hljs-number">0</span>) == <span class="hljs-number">0</span>) 
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"A number cannot be divied by zero.\n"</span>);
+            <span class="hljs-keyword">else</span>
+                mpf_div(result, a, b); 
+        } 
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid Input\n"</span>);
+
+        <span class="hljs-keyword">mpf_t</span> <span class="hljs-built_in">exp</span>;
+        mpf_init_set_d(<span class="hljs-built_in">exp</span>,<span class="hljs-number">0</span>);
+        <span class="hljs-keyword">while</span>(mpf_cmp_d(result, <span class="hljs-number">10</span>) &gt;= <span class="hljs-number">0</span> || mpf_cmp_d(result, <span class="hljs-number">-10</span>) &lt;= <span class="hljs-number">0</span>)
+        {
+            mpf_div_ui(result,result,<span class="hljs-number">10</span>);
+            mpf_add_ui(<span class="hljs-built_in">exp</span>,<span class="hljs-built_in">exp</span>,<span class="hljs-number">1</span>);
+        }
+        <span class="hljs-keyword">if</span> (mpf_cmp_d(result, <span class="hljs-number">10</span>) &gt;= <span class="hljs-number">0</span>)
+        {
+            mpf_div_ui(result,result,<span class="hljs-number">10</span>);
+            mpf_add_ui(<span class="hljs-built_in">exp</span>,<span class="hljs-built_in">exp</span>,<span class="hljs-number">1</span>);
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s %s %s = "</span>,num1,<span class="hljs-keyword">operator</span>,num2);
+        gmp_printf(<span class="hljs-string">"%.Ffe%.Ff\n"</span>,result,<span class="hljs-built_in">exp</span>);
+        mpf_clear(<span class="hljs-built_in">exp</span>);
+    }
+    mpf_clear(a);
+    mpf_clear(b);
+    mpf_clear(result);
+    
+}
+<span class="hljs-comment">//scientific notation</span>
+</div></code></pre>
+<h2 id="part-3---result--vertification">Part 3 - Result &amp; Vertification</h2>
+<p><strong>Test case 1</strong></p>
+<p><img src="./Calculator/figure/1.jpg" alt="1.jpg"></p>
+<p><strong>Test case 2</strong></p>
+<p><img src="./Calculator/figure/2.jpg" alt="2.jpg"></p>
+<blockquote>
+<p>It tells why operation fails.</p>
+</blockquote>
+<p><strong>Test case 3</strong></p>
+<p><img src="./Calculator/figure/3.jpg" alt="3.jpg"></p>
+<blockquote>
+<p>It tells when not a number.</p>
+</blockquote>
+<p><strong>Test case 4</strong></p>
+<p><img src="./Calculator/figure/4.jpg" alt="4.jpg"></p>
+<blockquote>
+<p>It can process large numbers.</p>
+</blockquote>
+<p><strong>Test case 5</strong></p>
+<p><img src="./Calculator/figure/5.jpg" alt="5.jpg"></p>
+<blockquote>
+<p>Even scientific numbers.</p>
+</blockquote>
+<p><strong>Test case 6</strong></p>
+<p><img src="./Calculator/figure/6.jpg" alt="6.jpg"></p>
+<p><strong>Test case 7</strong></p>
+<p><img src="./Calculator/figure/7.jpg" alt="7.jpg"></p>
+<blockquote>
+<p>It reminds users how to use it.</p>
+</blockquote>
+<h2 id="part-4---difficulties-and-solution">Part 4 - Difficulties and Solution</h2>
+<blockquote>
+<p>Due to that I had little thing familiar with C/C++ since I am beginner of C programming, I indeed used GPT to assist to enlarge the range and my sight to the great programming world and to provide me with necessary functions and methods, though this work is based on my structure and thoughts.</p>
+</blockquote>
+<h3 id="main-problems">Main problems</h3>
+<p>Killing zeros is a very important step in our code since all floats are set with a default precision of 6. Then, we first use <code>gmp_asprintf</code> to convert the gmp type float into a string so that we could cut off zeros from back. It needs to be careful that under which circumstances to kill zeros.</p>
+<p>I happen to find that standard output of scientific notation, which is supposed to be aeb, in which a is a number between 1 and 10, becomes aeb in which a is smaller than 1. In order to fix this, I repeatedly turns numbers into strings to fix, and combine them to be (10a)e(b-1).</p>
+<p>Unfortunately, I encounter <code>segmentation fault</code> for several times when using <code>mpf_get_str</code> to extract what I want into strings. It turns out that be away from those unfamiliar methods that GPT offers.</p>
+<h2 id="appendix">Appendix</h2>
+<blockquote>
+<p>In this section, I would like to show my initial attempt on this project just as what I have done in EE205.</p>
+</blockquote>
+<h3 id="calculation">Calculation</h3>
+<p>When I first got down to this project, I refused to use any outer source package but I failed two weeks later since I had spent almost a whole day to code addition while I was not familiar with operations that could be done on all kinds of datatype.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">char</span> num1[<span class="hljs-built_in">max</span>],<span class="hljs-keyword">char</span> num2[<span class="hljs-built_in">max</span>],<span class="hljs-keyword">char</span> result[<span class="hljs-built_in">max</span>+<span class="hljs-number">1</span>])</span>
+</span>{
+    <span class="hljs-keyword">int</span> carry = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-built_in">max</span><span class="hljs-number">-2</span>; i &gt;= <span class="hljs-number">0</span>; i--) 
+    {
+        <span class="hljs-keyword">int</span> digit1 = (num1[i]);
+        <span class="hljs-keyword">int</span> digit2 = (num2[i]);
+
+        <span class="hljs-keyword">int</span> sum = digit1 + digit2 + carry;
+        <span class="hljs-keyword">if</span> (sum == <span class="hljs-number">0</span>)
+        ;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sum &gt;= <span class="hljs-number">97</span> &amp;&amp; sum &lt;= <span class="hljs-number">106</span>)
+        {
+            result[i+<span class="hljs-number">1</span>] = sum - <span class="hljs-number">48</span>;
+            carry = (sum - <span class="hljs-number">96</span>) / <span class="hljs-number">10</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            result[i+<span class="hljs-number">1</span>] = sum - <span class="hljs-number">58</span>;
+            carry = (sum - <span class="hljs-number">96</span>) / <span class="hljs-number">10</span>;
+        }
+    }
+    <span class="hljs-keyword">if</span>(carry != <span class="hljs-number">0</span>)
+        result[<span class="hljs-number">0</span>] = carry + <span class="hljs-string">'0'</span>;
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">198</span>; i++)
+            result[i<span class="hljs-number">-1</span>] = result[i];
+    result[<span class="hljs-built_in">max</span> + <span class="hljs-number">1</span>] = <span class="hljs-string">'\0'</span>;
+}
+<span class="hljs-comment">//define a function for addition</span>
+</div></code></pre>
+<p><em><strong>(Obviously, it was not tidy nor efficient. I had even used ASCII to calculate)</strong></em></p>
+<p>This addition was based on an idea of character calculation in two strings and failed because I couldn't adapt it to fit decimals as well.</p>
+<p>The second try was on exponetial numbers when I tried to figure out multiplication between 1e200 and 1e200.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">decompose</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *input, <span class="hljs-keyword">char</span> **beforeE, <span class="hljs-keyword">char</span> **afterE)</span> 
+</span>{
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *posi = <span class="hljs-built_in">strchr</span>(input, <span class="hljs-string">'e'</span>);
+    <span class="hljs-keyword">if</span> (posi == <span class="hljs-literal">NULL</span>) 
+    {
+        posi = <span class="hljs-built_in">strchr</span>(input, <span class="hljs-string">'E'</span>);
+    }
+    <span class="hljs-keyword">size_t</span> eIndex = posi - input;
+
+    *beforeE = <span class="hljs-built_in">malloc</span>(eIndex + <span class="hljs-number">1</span>);
+    <span class="hljs-built_in">strncpy</span>(*beforeE, input, eIndex);
+    (*beforeE)[eIndex] = <span class="hljs-string">'\0'</span>;
+
+    *afterE = strdup(posi + <span class="hljs-number">1</span>);
+}
+<span class="hljs-comment">//指数拆解函数</span>
+
+<span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">combine</span><span class="hljs-params">(<span class="hljs-keyword">double</span> num1, <span class="hljs-keyword">double</span> num2)</span> 
+</span>{
+    <span class="hljs-keyword">char</span> *result = <span class="hljs-built_in">malloc</span>(<span class="hljs-number">100</span>);
+
+    <span class="hljs-built_in">sprintf</span>(result, <span class="hljs-string">"%g"</span>, num1);
+    <span class="hljs-built_in">strcat</span>(result, <span class="hljs-string">"e"</span>);
+    <span class="hljs-keyword">char</span> temp[<span class="hljs-number">10</span>];
+    <span class="hljs-built_in">sprintf</span>(temp, <span class="hljs-string">"%g"</span>, num2);
+    <span class="hljs-built_in">strcat</span>(result, temp);
+
+    <span class="hljs-keyword">return</span> result;
+}
+<span class="hljs-comment">//指数合成函数</span>
+</div></code></pre>
+<p>I wrote two functions to decompose and to combine numbers to a single exponetial number. Thus, I could calculate any type of exponetial number with base equal to 10.</p>
+<p>However, despite success in exponetial counting, I cannot solve 987654321 * 987654321 using <code>double</code> because it was not precise enough.</p>
+<p>Eventually, to make sure my precision to convince my boss my teacher, and my instructor, I choose to include <code>gmp.h</code> to realize sufficiently accurate calculation.</p>
+<h3 id="neglectable-experience-and-comments">Neglectable experience and comments</h3>
+<p><em><strong>not important at all</strong></em></p>
+<p>In the end, I feel like expressing my enthuisiasm in exploring C/C++ programming. Project 1 indeed cost me a large amount of time while I learned a lot in programming. I'm looking forward to that my ability in programming will be further and further strengthened so that finally I will have managed to accomplish most tasks and challenges.</p>
+
+</body>
+</html>
